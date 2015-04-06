@@ -15,37 +15,3 @@ Once again, the case of the ray passing through a vertex may pose numerical prob
 
 An intuitive explanation of why it works is that every time we cross a border, we change "country" (inside-outside, or outside-inside), but the last "country" we land on is surely outside (since the inside of the polygon is finite, while the ray continues towards infinity). So, if we crossed an odd number of borders we were surely inside, otherwise we were outside; we can follow the ray backward to see it better: starting from outside, only an odd number of crossing can give an inside: outside-inside, outside-inside-outside-inside, and so on (the - represents the crossing of a border).
 
-ray_intersects_segment:
-    P : the point from which the ray starts
-    A : the end-point of the segment with the smallest y coordinate
-        (A must be "below" B)
-    B : the end-point of the segment with the greatest y coordinate
-        (B must be "above" A)
- if Py = Ay or Py = By then
-   Py ← Py + ε
- end if
- if Py < Ay or Py > By then 
-   return false
- else if Px > max(Ax, Bx) then 
-   return false
- else
-   if Px < min(Ax, Bx) then
-     return true
-   else
-     if Ax ≠ Bx then
-       m_red ← (By - Ay)/(Bx - Ax)
-     else
-       m_red ← ∞
-     end if
-     if Ax ≠ Px then
-       m_blue ← (Py - Ay)/(Px - Ax)
-     else
-       m_blue ← ∞
-     end if
-     if m_blue ≥ m_red then
-       return true
-     else
-       return false
-     end if
-   end if
- end if
